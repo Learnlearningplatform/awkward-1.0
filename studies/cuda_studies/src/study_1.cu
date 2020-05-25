@@ -50,7 +50,9 @@ int main() {
 
   // This returns an error, CUDA 11 promises to mitigate this by telling that host pointers are  cudaMemoryTypeUnregistered instead of throwing an error
   // This is useful, since now we know that if there's an error it's probably because the pointer is in Main Memory
-//  HANDLE_ERROR(cudaPointerGetAttributes(&att_1, (void*) array));
+  auto err = cudaPointerGetAttributes(&att_1, (void*) array);
+  // Returns 1 on Host or Invalid Pointer
+  std::cout << err << std::endl;
   std::cout << attr.device << "\n";
 //  std::cout << att_1.type << "\n";
 
